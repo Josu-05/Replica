@@ -12,6 +12,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . /var/www/html
 
+RUN mkdir -p /var/www/html/writable/cache
+RUN chmod -R 777 /var/www/html/writable
+
 WORKDIR /var/www/html
 
 RUN composer install --no-dev --optimize-autoloader
