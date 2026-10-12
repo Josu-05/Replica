@@ -1,10 +1,14 @@
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y git unzip zip
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zip \
+    libicu-dev
+
+RUN docker-php-ext-install mysqli intl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-RUN docker-php-ext-install mysqli
 
 COPY . /var/www/html
 
